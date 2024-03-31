@@ -19,7 +19,7 @@ const Gptpage = () => {
 
     const handleSubmit = async () => {
         try {
-            await axios.post('http://localhost:5173/', { statement });
+            await axios.post('http://localhost:5173/Gpt3', { statement });
             console.log('Statement submitted successfully');
             // Optionally, reset the statement state
             setStatement('');
@@ -27,6 +27,20 @@ const Gptpage = () => {
             console.error('Error submitting statement:', error);
         }
     };
+
+    /* commented because no data in database currently  
+   useEffect(() => {
+       const fetchStatements = async () => {
+           try {
+               const response = await axios.get('http://localhost:5173/Gpt3');
+               setStatements(response.data);
+           } catch (err) {
+               console.error('Error fetching statements:', err);
+           }
+       };
+
+       fetchStatements(); // Call the function on component mount
+   }, []); */
 
 
 
@@ -105,6 +119,15 @@ const Gptpage = () => {
                             </div>
                         </div>
                     </div>
+                    {/* Code to fetch messages from MongoDb commented out becuse no initial commets were added in database manually it is show by design purpose on scren statically  
+                   <div className='messages-container'>
+               <h2>Fetched Messages:</h2>
+               <ul>
+                   {statements.map(statement => (
+                       <li key={statement._id}>{statement.statement}</li>
+                   ))}
+               </ul>
+           </div> */}
                 </div>
             </div>
         </div>

@@ -38,7 +38,17 @@ const statementSchema = new mongoose.Schema({
 
 const Statement = mongoose.model('Statement', statementSchema);
 
-app.post('/', async (req, res) => {
+app.get('/Gpt3', async (req, res) => {
+    try {
+        const statements = await Statement.find(); // Fetch all statements
+        res.json(statements);
+    } catch (err) {
+        console.error('Error fetching statements:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/Gpt3', async (req, res) => {
     const { statement } = req.body;
     const newStatement = new Statement({ statement });
     try {
